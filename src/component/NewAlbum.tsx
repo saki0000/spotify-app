@@ -1,0 +1,117 @@
+import {
+  AspectRatio,
+  Card,
+  Center,
+  Grid,
+  Image,
+  Modal,
+  Text,
+  useMantineTheme,
+} from "@mantine/core";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { selectToken } from "../features/counter/counterSlice";
+type modal = [string, string, string];
+
+const NewAlbum = () => {
+  const theme = useMantineTheme();
+  const token = useSelector(selectToken);
+  const [opened, setOpened] = useState(false);
+  const [modalValue, setModalValue] = useState<modal>(["", "", ""]);
+
+  const [tracksData, setTracksData] = useState<any>();
+
+  const modal = (track: any) => {
+    setModalValue([
+      track.artists[0].name,
+      track.name,
+      track.album.images[1].url,
+    ]);
+    setOpened(true);
+  };
+
+  const searchTracks = async () => {
+    await axios
+      .get(`https://api.spotify.com/v1/browse/new-releases?limit=30`, {
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res: any) => {
+        setTracksData(res.data.albums.items);
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  useEffect(() => {
+    searchTracks();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  return (
+    <div style={{ width: 700 }}>
+      <Center>
+        {tracksData ? (
+          <>
+            <Grid grow>
+              {tracksData.map((track: any) => (
+                <Grid.Col span={4}>
+                  <Card
+                    key={track.id}
+                    shadow="sm"
+                    p="lg"
+                    withBorder
+                    style={{ marginTop: 20 }}
+                  >
+                    <Card.Section>
+                      <AspectRatio ratio={1 / 1}>
+                        <Image src={track.images[1].url} alt="" />
+                      </AspectRatio>
+                    </Card.Section>
+                    <Text
+                      style={{ marginTop: 10 }}
+                      align="center"
+                      onClick={() => modal(track)}
+                    >
+                      {track.name}
+                    </Text>
+
+                    <Text size="sm" color={theme.colors.gray[7]} align="center">
+                      {track.artists[0].name}
+                    </Text>
+                  </Card>
+                </Grid.Col>
+              ))}
+              <Modal
+                size="sm"
+                opened={opened}
+                onClose={() => setOpened(false)}
+                title={modalValue[1]}
+              >
+                <Card shadow="sm" p="lg" withBorder>
+                  <Card.Section>
+                    <AspectRatio ratio={1 / 1}>
+                      <Image src={modalValue[2]} alt="" />
+                    </AspectRatio>
+                  </Card.Section>
+                  <Text style={{ marginTop: 5 }} align="center">
+                    {modalValue[0]}
+                  </Text>
+                  <Text align="center">{modalValue[1]}</Text>
+                </Card>
+              </Modal>
+            </Grid>
+          </>
+        ) : (
+          <></>
+        )}
+      </Center>
+    </div>
+  );
+};
+
+export default NewAlbum;
