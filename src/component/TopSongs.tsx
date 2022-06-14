@@ -9,14 +9,13 @@ import {
   Image,
   Modal,
   Select,
+  Table,
   Text,
-  Tooltip,
   useMantineTheme,
 } from "@mantine/core";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { BarChart, CartesianGrid, XAxis, YAxis, Legend, Bar } from "recharts";
 import { selectToken } from "../features/counter/counterSlice";
 
 const TopSongs = () => {
@@ -27,6 +26,7 @@ const TopSongs = () => {
   const [terms, setTerms] = useState<any>("medium_term");
   const [opened, setOpened] = useState<boolean>(false);
   const [features, setFeatures] = useState<any>([]);
+  const [featureRow, setFeatureRow] = useState<any>();
 
   const searchArtists = async () => {
     await axios
@@ -60,30 +60,38 @@ const TopSongs = () => {
         setFeatures([
           {
             feature: "acousticness",
-            A: res.data.acousticness * 100,
+            A: Math.round(res.data.acousticness * 1000) / 10,
           },
           {
             feature: "danceability",
-            A: res.data.danceability * 100,
+            A: Math.round(res.data.danceability * 1000) / 10,
           },
           {
             feature: "energy",
-            A: res.data.energy * 100,
+            A: Math.round(res.data.energy * 1000) / 10,
           },
           {
             feature: "instrumentalness",
-            A: res.data.instrumentalness * 100,
+            A: Math.round(res.data.instrumentalness * 1000) / 10,
           },
           {
             feature: "liveness",
-            A: res.data.liveness * 100,
+            A: Math.round(res.data.liveness * 1000) / 10,
           },
 
           {
             feature: "valence",
-            A: res.data.valence * 100,
+            A: Math.round(res.data.valence * 1000) / 10,
           },
         ]);
+        setFeatureRow(
+          features.map((f: any) => (
+            <tr key={f.feature}>
+              <td>{f.feature}</td>
+              <td>{f.A}</td>
+            </tr>
+          ))
+        );
         console.log(features);
       })
       .catch((err) => {
@@ -167,14 +175,15 @@ const TopSongs = () => {
             size="lg"
           >
             <Center>
-              <BarChart data={features}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="feature" />
-                <YAxis />
-                <Tooltip label={undefined} children={undefined} />
-                <Legend />
-                <Bar dataKey="A" fill="#8884d8" />
-              </BarChart>
+              <Table striped highlightOnHover>
+                <thead>
+                  <tr>
+                    <th>Feature</th>
+                    <th>Value</th>
+                  </tr>
+                </thead>
+                <tbody>{featureRow}</tbody>
+              </Table>
             </Center>
           </Modal>
         </Center>
