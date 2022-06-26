@@ -287,7 +287,11 @@ const Playlists = () => {
                       })}
                       key={value.id}
                     >
-                      <Group align="apart" style={{ height: 50 }}>
+                      <Group
+                        position="apart"
+                        align="center"
+                        style={{ height: 50 }}
+                      >
                         <Group>
                           <Avatar src={value.album.images[2].url} alt="" />
                           <Text>{value.name}</Text>
