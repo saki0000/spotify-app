@@ -14,8 +14,8 @@ import {
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { selectToken } from "../features/counter/counterSlice";
-import { selectUser } from "../features/userSlice";
+import { selectToken } from "../../features/counter/counterSlice";
+import { selectUser } from "../../features/userSlice";
 
 const Playlists = () => {
   const user = useSelector(selectUser);

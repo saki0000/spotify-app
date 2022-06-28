@@ -10,8 +10,8 @@ import {
   Text,
 } from "@mantine/core";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../features/counter/counterSlice";
-import { selectUser } from "../features/userSlice";
+import { logout } from "../../features/counter/counterSlice";
+import { selectUser } from "../../features/userSlice";
 import NewAlbum from "./NewAlbum";
 import Playlists from "./Playlists";
 import SearchArtist from "./SearchArtist";

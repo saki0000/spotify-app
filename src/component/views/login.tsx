@@ -1,6 +1,6 @@
 import { Button, Container, Stack, Text } from "@mantine/core";
-import { accessUrl } from "../spotify";
-import image from "../source/image.jpeg";
+import { accessUrl } from "../../spotify";
+import image from "../../source/image.jpeg";
 
 function Login() {
   return (
