@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { login, selectToken } from "../features/counter/counterSlice";
-import { loginUser } from "../features/userSlice";
-import { getTokenFromUrl } from "../spotify";
+import { login, selectToken } from "../../features/counter/counterSlice";
+import { loginUser } from "../../features/userSlice";
+import { getTokenFromUrl } from "../../spotify";
 import LoggedIn from "./loggedin";
 import Login from "./login";
 

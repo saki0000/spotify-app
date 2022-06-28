@@ -42,7 +42,7 @@ const SearchArtist = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [artist]);
   return (
-    <div style={{ width: 700 }}>
+    <div>
       <Autocomplete
         value={artist}
         data={[]}
@@ -61,7 +61,7 @@ const SearchArtist = () => {
             <>
               <Grid grow>
                 {artistsData.map((artist: any) => (
-                  <Grid.Col span={4}>
+                  <Grid.Col span={3}>
                     <Card
                       key={artist.id}
                       shadow="sm"

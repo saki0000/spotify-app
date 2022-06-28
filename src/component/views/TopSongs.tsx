@@ -1,25 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {
-  AspectRatio,
-  Button,
-  Card,
-  Center,
-  Grid,
-  Group,
-  Image,
-  Modal,
-  Select,
-  Table,
-  Text,
-  useMantineTheme,
-} from "@mantine/core";
+import { Button, Center, Grid, Group, Select } from "@mantine/core";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { selectToken } from "../features/counter/counterSlice";
+import { selectToken } from "../../features/counter/counterSlice";
+import Cards from "../parts/cards/Cards";
+import SongsInfoModal from "../parts/modal/SongsInfoModal";
 
 const TopSongs = () => {
-  const theme = useMantineTheme();
   const [display, setDisplay] = useState(true);
   const [songs, setSongs] = useState<any>([]);
   const token = useSelector(selectToken);
@@ -31,7 +19,7 @@ const TopSongs = () => {
   const searchArtists = async () => {
     await axios
       .get(
-        `https://api.spotify.com/v1/me/top/tracks?time_range=${terms}&limit=30`,
+        `https://api.spotify.com/v1/me/top/tracks?time_range=${terms}&limit=40`,
         {
           headers: {
             Accept: "application/json",
@@ -103,7 +91,7 @@ const TopSongs = () => {
   }, [terms]);
   return (
     <div>
-      <div style={{ width: 700 }}>
+      <div>
         <Group position="center">
           <Select
             value={terms}
@@ -130,62 +118,34 @@ const TopSongs = () => {
           {display ? (
             <Grid grow>
               {songs.map((song: any) => (
-                <Grid.Col span={4}>
-                  <Card
-                    key={song.id}
-                    shadow="sm"
-                    p="lg"
-                    withBorder
-                    style={{ marginTop: 20 }}
+                <Cards
+                  id={song.id}
+                  image={song.album.images[1].url}
+                  trackName={song.name}
+                  artistName={song.artists[0].name}
+                >
+                  <Button
+                    onClick={() => {
+                      trackFeature(song.id);
+                      setOpened(true);
+                    }}
+                    variant="subtle"
+                    radius="lg"
+                    color="yellow"
                   >
-                    <Card.Section>
-                      <AspectRatio ratio={1 / 1}>
-                        <Image
-                          color={theme.colors.yellow[5]}
-                          width={340}
-                          height={340}
-                          src={song.album.images[1].url}
-                          alt=""
-                        />
-                      </AspectRatio>
-                    </Card.Section>
-                    <Text
-                      onClick={() => {
-                        trackFeature(song.id);
-                        setOpened(true);
-                      }}
-                      style={{ marginTop: 15 }}
-                    >
-                      {song.name}
-                    </Text>
-                    <Text size="sm" color={theme.colors.gray[7]}>
-                      {song.artists[0].name}
-                    </Text>
-                  </Card>
-                </Grid.Col>
+                    Infomation
+                  </Button>
+                </Cards>
               ))}
             </Grid>
           ) : (
             <></>
           )}
-          <Modal
+          <SongsInfoModal
             opened={opened}
-            onClose={() => setOpened(false)}
-            title=""
-            size="lg"
-          >
-            <Center>
-              <Table striped highlightOnHover>
-                <thead>
-                  <tr>
-                    <th>Feature</th>
-                    <th>Value</th>
-                  </tr>
-                </thead>
-                <tbody>{featureRow}</tbody>
-              </Table>
-            </Center>
-          </Modal>
+            setOpened={setOpened}
+            featureRow={featureRow}
+          />
         </Center>
       </div>
     </div>

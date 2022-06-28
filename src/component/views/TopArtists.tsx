@@ -2,26 +2,21 @@
 import {
   useMantineTheme,
   Button,
-  Card,
-  Image,
   Text,
   Grid,
   Center,
-  AspectRatio,
   Select,
   Group,
   Stack,
-  Title,
-  Divider,
   Paper,
-  Badge,
-  Modal,
   Accordion,
 } from "@mantine/core";
 import axios from "axios";
 import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
-import { selectToken } from "../features/counter/counterSlice";
+import { selectToken } from "../../features/counter/counterSlice";
+import Cards from "../parts/cards/Cards";
+import ArtistInfoModal from "../parts/modal/ArtistInfoModal";
 
 const TopArtists = () => {
   const theme = useMantineTheme();
@@ -36,7 +31,7 @@ const TopArtists = () => {
   const searchArtists = async () => {
     await axios
       .get(
-        `https://api.spotify.com/v1/me/top/artists?time_range=${terms}&limit=30`,
+        `https://api.spotify.com/v1/me/top/artists?time_range=${terms}&limit=40`,
         {
           headers: {
             Accept: "application/json",
@@ -76,6 +71,7 @@ const TopArtists = () => {
           [item.key]: item.value,
         }))
       );
+      // eslint-disable-next-line array-callback-return
       Object.keys(obj).map((k: any) => {
         obj[k] === 1 ?? delete obj[k];
       });
@@ -90,7 +86,7 @@ const TopArtists = () => {
   }, [terms]);
 
   return (
-    <div style={{ width: 700 }}>
+    <div>
       <Group position="center">
         <Select
           value={terms}
@@ -147,70 +143,33 @@ const TopArtists = () => {
         {display ? (
           <Grid>
             {artists.map((artist: any) => (
-              <Grid.Col span={4}>
-                <Card
-                  key={artist.id}
-                  shadow="sm"
-                  p="lg"
-                  withBorder
-                  style={{ marginTop: 20 }}
+              <Cards
+                id={artist.id}
+                image={artist.images[1].url}
+                artistName={artist.name}
+              >
+                <Button
+                  onClick={() => {
+                    setOpened(true);
+                    setArtist(artist);
+                  }}
+                  variant="subtle"
+                  radius="lg"
+                  color="yellow"
                 >
-                  <Card.Section>
-                    <AspectRatio ratio={1 / 1}>
-                      <Image
-                        color={theme.colors.yellow[5]}
-                        src={artist.images[1].url}
-                        alt=""
-                      />
-                    </AspectRatio>
-                  </Card.Section>
-                  <Text style={{ marginTop: 15 }}>{artist.name}</Text>
-                  <Button
-                    onClick={() => {
-                      setOpened(true);
-                      setArtist(artist);
-                    }}
-                    variant="subtle"
-                    radius="lg"
-                    color="yellow"
-                  >
-                    Infomation
-                  </Button>
-                </Card>
-              </Grid.Col>
+                  Infomation
+                </Button>
+              </Cards>
             ))}
           </Grid>
         ) : (
           <></>
         )}
-        <Modal
+        <ArtistInfoModal
+          artist={artist}
           opened={opened}
-          onClose={() => setOpened(false)}
-          title=""
-          size="md"
-        >
-          {artist ? (
-            <Stack align="center">
-              <Text color={theme.colors.dark[3]}>
-                <Title>{artist.name}</Title>
-              </Text>
-              <Group>
-                <Text color={theme.colors.gray[6]}>Followers</Text>
-                <Text color={theme.colors.gray[7]}>
-                  {artist.followers.total.toLocaleString()}
-                </Text>
-              </Group>
-              <Divider size="sm" variant="solid"></Divider>
-              {artist.genres.map((value: string) => (
-                <Badge color="yellow" size="lg">
-                  {value}
-                </Badge>
-              ))}
-            </Stack>
-          ) : (
-            <></>
-          )}
-        </Modal>
+          setOpened={setOpened}
+        />
       </Center>
     </div>
   );

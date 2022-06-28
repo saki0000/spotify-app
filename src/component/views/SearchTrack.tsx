@@ -52,7 +52,7 @@ const SearchTrack = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [track]);
   return (
-    <div style={{ width: 700 }}>
+    <div>
       <Autocomplete
         placeholder="Search Tracks"
         value={track}
@@ -65,7 +65,7 @@ const SearchTrack = () => {
           <>
             <Grid grow>
               {tracksData.map((track: any) => (
-                <Grid.Col span={4}>
+                <Grid.Col span={3}>
                   <Card
                     key={track.id}
                     shadow="sm"

@@ -1,7 +1,7 @@
 import "./App.css";
 import "./App.css";
 import { MantineProvider } from "@mantine/core";
-import Auth from "./component/Auth";
+import Auth from "./component/views/Auth";
 
 function App() {
   return (
