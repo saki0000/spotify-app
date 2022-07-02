@@ -1,14 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Button, Center, Grid, Group, Select } from "@mantine/core";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../../features/counter/counterSlice";
-import Cards from "../../parts/cards/Cards";
 import SongsInfoModal from "../../parts/modal/SongsInfoModal";
+import TopTrackTemp from "../../templates/TopTrack";
 
 const TopSongs = () => {
-  const [display, setDisplay] = useState(true);
   const [songs, setSongs] = useState<any>([]);
   const token = useSelector(selectToken);
   const [terms, setTerms] = useState<any>("medium_term");
@@ -72,6 +70,8 @@ const TopSongs = () => {
             A: Math.round(res.data.valence * 1000) / 10,
           },
         ]);
+      })
+      .then(() => {
         setFeatureRow(
           features.map((f: any) => (
             <tr key={f.feature}>
@@ -80,7 +80,6 @@ const TopSongs = () => {
             </tr>
           ))
         );
-        console.log(features);
       })
       .catch((err) => {
         console.log(err);
@@ -91,63 +90,18 @@ const TopSongs = () => {
   }, [terms]);
   return (
     <div>
-      <div>
-        <Group position="center">
-          <Select
-            value={terms}
-            size="md"
-            data={[
-              { value: "long_term", label: "Several Years" },
-              { value: "medium_term", label: "Last 4 Months" },
-              { value: "short_term", label: "Last 4 Weeks" },
-            ]}
-            onChange={setTerms}
-          ></Select>
-          <Button
-            radius="xl"
-            color="yellow"
-            onClick={() => {
-              setDisplay(!display);
-            }}
-          >
-            {display ? "非表示" : "表示"}
-          </Button>
-        </Group>
-
-        <Center>
-          {display ? (
-            <Grid grow>
-              {songs.map((song: any) => (
-                <Cards
-                  id={song.id}
-                  image={song.album.images[1].url}
-                  trackName={song.name}
-                  artistName={song.artists[0].name}
-                >
-                  <Button
-                    onClick={() => {
-                      trackFeature(song.id);
-                      setOpened(true);
-                    }}
-                    variant="subtle"
-                    radius="lg"
-                    color="yellow"
-                  >
-                    Infomation
-                  </Button>
-                </Cards>
-              ))}
-            </Grid>
-          ) : (
-            <></>
-          )}
-          <SongsInfoModal
-            opened={opened}
-            setOpened={setOpened}
-            featureRow={featureRow}
-          />
-        </Center>
-      </div>
+      <TopTrackTemp
+        terms={terms}
+        setTerms={setTerms}
+        songs={songs}
+        trackFeature={trackFeature}
+        setOpened={setOpened}
+      />
+      <SongsInfoModal
+        opened={opened}
+        setOpened={setOpened}
+        featureRow={featureRow}
+      />
     </div>
   );
 };
