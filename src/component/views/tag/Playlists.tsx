@@ -1,46 +1,33 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {
-  ActionIcon,
-  Avatar,
-  Button,
-  Center,
-  Group,
-  Menu,
-  Stack,
-  Title,
-} from "@mantine/core";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../../features/counter/counterSlice";
 import { selectUser } from "../../../features/userSlice";
-import {
-  AiFillCaretDown,
-  AiFillCustomerService,
-  AiFillDelete,
-  AiFillTool,
-} from "react-icons/ai";
-import image from "../../../source/ダウンロード.png";
 import PlaylistModal from "../../parts/modal/PlaylistModal";
 import CreatePlaylistModal from "../../parts/modal/CreatePlaylistModal";
 import UpdatePlaylistModal from "../../parts/modal/UpdatePlaylistModal";
 import DeletePlaylistModal from "../../parts/modal/DeletePlaylistModal";
-import PlaylistTrack from "../../parts/playlistTrack/PlaylistTrack";
+import PlaylistsTemp from "../../templates/Playlists";
 
 const Playlists = () => {
   const user = useSelector(selectUser);
   const userToken = useSelector(selectToken);
-  const [playlists, setPlaylists] = useState<any>();
-  const [tracksValue, setTracksValue] = useState<any>();
-  const [playlistValue, setPlaylistValue] = useState<any>({});
+
   const [opened, setOpened] = useState<boolean>(false);
-  const [searchTracks, setSearchTracks] = useState<any>("");
-  const [tracksData, setTracksData] = useState<any>();
   const [openedModal, setOpenedModal] = useState<boolean>(false);
-  const [playlistName, setPlaylistName] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
   const [openedModal2, setOpenedModal2] = useState<boolean>(true);
   const [openedDelete, setOpenedDelete] = useState<boolean>(false);
+
+  const [playlists, setPlaylists] = useState<any>();
+  const [playlistValue, setPlaylistValue] = useState<any>({});
+  const [playlistName, setPlaylistName] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+
+  const [tracksValue, setTracksValue] = useState<any>();
+  const [tracksData, setTracksData] = useState<any>();
+  const [searchTracks, setSearchTracks] = useState<any>("");
+
   const [deleteData, setDeleteData] = useState<any>([]);
 
   const createPlaylist = async () => {
@@ -88,7 +75,6 @@ const Playlists = () => {
       )
       .then(() => {
         getTracks(playlistValue);
-        console.log(tracksValue);
       })
       .catch((err) => {
         console.log(err);
@@ -113,6 +99,7 @@ const Playlists = () => {
         console.log(err);
       });
   };
+
   const searchTrack = async () => {
     await axios
       .get(`https://api.spotify.com/v1/search?q=${searchTracks}&type=track`, {
@@ -125,7 +112,6 @@ const Playlists = () => {
       })
       .then((res: any) => {
         setTracksData(res.data.tracks.items);
-        console.log(res.data.tracks.items);
       })
       .catch((err) => {
         console.log(err);
@@ -143,7 +129,6 @@ const Playlists = () => {
       })
       .then((res) => {
         setTracksValue(res.data.items);
-        console.log(tracksValue);
       })
       .catch((err) => {
         console.log(err);
@@ -213,81 +198,16 @@ const Playlists = () => {
         setTracksValue={setTracksValue}
         setDeleteData={setDeleteData}
       />
-      <Group position="center">
-        <Button
-          radius="xl"
-          rightIcon={<AiFillCaretDown></AiFillCaretDown>}
-          color="yellow"
-          onClick={() => {
-            getPlaylists();
-            setOpenedModal2(true);
-          }}
-        >
-          Playlists
-        </Button>
-        <Button
-          radius="xl"
-          rightIcon={<AiFillCustomerService></AiFillCustomerService>}
-          color="yellow"
-          onClick={() => setOpenedModal(true)}
-        >
-          Create
-        </Button>
-      </Group>
-
-      <Center>
-        <Stack style={{ marginTop: 30 }}>
-          {playlistValue !== {} ? (
-            <Group position="center">
-              {playlistValue.images ? (
-                <Avatar
-                  src={playlistValue.images[2]?.url}
-                  placeholder={image}
-                />
-              ) : (
-                <></>
-              )}
-
-              <Title>{playlistValue.name}</Title>
-              <Menu>
-                <Menu.Label>Menu</Menu.Label>
-                <Menu.Item
-                  icon={<AiFillTool></AiFillTool>}
-                  onClick={() => setOpened(true)}
-                >
-                  Update
-                </Menu.Item>
-              </Menu>
-            </Group>
-          ) : (
-            <></>
-          )}
-
-          {tracksValue ? (
-            <>
-              {tracksValue.map((value: any, index: number) => (
-                <PlaylistTrack
-                  valueId={value.id}
-                  valueImage={value.track.album.images[2]}
-                  valueName={value.track.name}
-                  valueArtistName={value.track.artists[0].name}
-                >
-                  <ActionIcon
-                    onClick={() => {
-                      setOpenedDelete(true);
-                      setDeleteData([value.track.uri, index]);
-                    }}
-                  >
-                    <AiFillDelete></AiFillDelete>
-                  </ActionIcon>
-                </PlaylistTrack>
-              ))}
-            </>
-          ) : (
-            <></>
-          )}
-        </Stack>
-      </Center>
+      <PlaylistsTemp
+        getPlaylists={getPlaylists}
+        setOpenedModal2={setOpenedModal2}
+        setOpenedModal={setOpenedModal}
+        playlistValue={playlistValue}
+        setOpened={setOpened}
+        tracksValue={tracksValue}
+        setOpenedDelete={setOpenedDelete}
+        setDeleteData={setDeleteData}
+      />
     </div>
   );
 };
