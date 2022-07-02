@@ -14,9 +14,9 @@ import {
 import axios from "axios";
 import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
-import { selectToken } from "../../features/counter/counterSlice";
-import Cards from "../parts/cards/Cards";
-import ArtistInfoModal from "../parts/modal/ArtistInfoModal";
+import { selectToken } from "../../../features/counter/counterSlice";
+import Cards from "../../parts/cards/Cards";
+import ArtistInfoModal from "../../parts/modal/ArtistInfoModal";
 
 const TopArtists = () => {
   const theme = useMantineTheme();

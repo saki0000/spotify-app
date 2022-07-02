@@ -3,9 +3,9 @@ import { Button, Center, Grid, Group, Select } from "@mantine/core";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { selectToken } from "../../features/counter/counterSlice";
-import Cards from "../parts/cards/Cards";
-import SongsInfoModal from "../parts/modal/SongsInfoModal";
+import { selectToken } from "../../../features/counter/counterSlice";
+import Cards from "../../parts/cards/Cards";
+import SongsInfoModal from "../../parts/modal/SongsInfoModal";
 
 const TopSongs = () => {
   const [display, setDisplay] = useState(true);

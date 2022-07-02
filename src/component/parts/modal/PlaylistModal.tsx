@@ -34,7 +34,7 @@ const PlaylistModal = ({
                     backgroundColor: theme.colors.gray[2],
                     textAlign: "center",
                     padding: theme.spacing.sm,
-                    margin: theme.spacing.xs,
+                    marginTop: theme.spacing.xs,
                     borderRadius: theme.radius.md,
                   })}
                 >

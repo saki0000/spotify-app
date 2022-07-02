@@ -20,15 +20,7 @@ const Cards = ({ id, image, trackName, artistName, children }: any) => {
         </Card.Section>
         {trackName ? (
           <>
-            <Text
-              //   onClick={() => {
-              //     trackFeature(id);
-              //     setOpened(true);
-              //   }}
-              style={{ marginTop: 15 }}
-            >
-              {trackName}
-            </Text>
+            <Text style={{ marginTop: 15 }}>{trackName}</Text>
             <Text size="sm" color={theme.colors.gray[7]}>
               {artistName}
             </Text>

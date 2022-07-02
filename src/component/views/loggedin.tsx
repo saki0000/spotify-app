@@ -12,12 +12,12 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../features/counter/counterSlice";
 import { selectUser } from "../../features/userSlice";
-import NewAlbum from "./NewAlbum";
-import Playlists from "./Playlists";
-import SearchArtist from "./SearchArtist";
-import SearchTrack from "./SearchTrack";
-import TopArtists from "./TopArtists";
-import TopSongs from "./TopSongs";
+import NewAlbum from "./tag/NewAlbum";
+import Playlists from "./tag/Playlists";
+import SearchArtist from "./tag/SearchArtist";
+import SearchTrack from "./tag/SearchTrack";
+import TopArtists from "./tag/TopArtists";
+import TopSongs from "./tag/TopSongs";
 
 function LoggedIn() {
   const dispatch = useDispatch();

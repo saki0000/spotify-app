@@ -12,20 +12,20 @@ import {
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { selectToken } from "../../features/counter/counterSlice";
-import { selectUser } from "../../features/userSlice";
+import { selectToken } from "../../../features/counter/counterSlice";
+import { selectUser } from "../../../features/userSlice";
 import {
   AiFillCaretDown,
   AiFillCustomerService,
   AiFillDelete,
   AiFillTool,
 } from "react-icons/ai";
-import image from "../../source/ダウンロード.png";
-import PlaylistModal from "../parts/modal/PlaylistModal";
-import CreatePlaylistModal from "../parts/modal/CreatePlaylistModal";
-import UpdatePlaylistModal from "../parts/modal/UpdatePlaylistModal";
-import DeletePlaylistModal from "../parts/modal/DeletePlaylistModal";
-import PlaylistTrack from "../parts/playlistTrack/PlaylistTrack";
+import image from "../../../source/ダウンロード.png";
+import PlaylistModal from "../../parts/modal/PlaylistModal";
+import CreatePlaylistModal from "../../parts/modal/CreatePlaylistModal";
+import UpdatePlaylistModal from "../../parts/modal/UpdatePlaylistModal";
+import DeletePlaylistModal from "../../parts/modal/DeletePlaylistModal";
+import PlaylistTrack from "../../parts/playlistTrack/PlaylistTrack";
 
 const Playlists = () => {
   const user = useSelector(selectUser);

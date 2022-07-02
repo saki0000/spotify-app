@@ -1,9 +1,8 @@
-import { Center, Grid } from "@mantine/core";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { selectToken } from "../../features/counter/counterSlice";
-import Cards from "../parts/cards/Cards";
+import { selectToken } from "../../../features/counter/counterSlice";
+import NewAlbumPage from "../../templates/NewAlbum";
 
 const NewAlbum = () => {
   const token = useSelector(selectToken);
@@ -30,28 +29,7 @@ const NewAlbum = () => {
     searchTracks();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  return (
-    <div>
-      <Center>
-        {tracksData ? (
-          <>
-            <Grid grow>
-              {tracksData.map((track: any) => (
-                <Cards
-                  id={track.id}
-                  image={track.images[1].url}
-                  trackName={track.name}
-                  artistName={track.artists[0].name}
-                />
-              ))}
-            </Grid>
-          </>
-        ) : (
-          <></>
-        )}
-      </Center>
-    </div>
-  );
+  return <NewAlbumPage tracksData={tracksData} />;
 };
 
 export default NewAlbum;
