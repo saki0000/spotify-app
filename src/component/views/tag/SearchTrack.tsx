@@ -9,6 +9,7 @@ const SearchTrack = () => {
 
   const [track, setTrack] = useState("");
   const [tracksData, setTracksData] = useState<any>();
+  const [uri, setUri] = useState<String>();
 
   const searchTracks = async () => {
     await axios
@@ -37,6 +38,8 @@ const SearchTrack = () => {
         track={track}
         setTrack={setTrack}
         tracksData={tracksData}
+        uri={uri}
+        setUri={setUri}
       />
     </div>
   );

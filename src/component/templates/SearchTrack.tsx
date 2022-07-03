@@ -1,8 +1,10 @@
-import { Autocomplete, Center, Grid } from "@mantine/core";
-import React from "react";
+import { Autocomplete, Button, Center, Dialog, Grid } from "@mantine/core";
+import React, { useState } from "react";
 import Cards from "../parts/cards/Cards";
+import Player from "../parts/Player";
 
-const SearchTrackTemp = ({ track, setTrack, tracksData }: any) => {
+const SearchTrackTemp = ({ track, setTrack, tracksData, uri, setUri }: any) => {
+  const [opened, setOpened] = useState(false);
   return (
     <div>
       <Autocomplete
@@ -22,7 +24,16 @@ const SearchTrackTemp = ({ track, setTrack, tracksData }: any) => {
                   image={track.album.images[1].url}
                   trackName={track.name}
                   artistName={track.artists[0].name}
-                />
+                >
+                  <Button
+                    onClick={() => {
+                      setUri(track.uri);
+                      setOpened(true);
+                    }}
+                  >
+                    play
+                  </Button>
+                </Cards>
               ))}
             </Grid>
           </>
@@ -30,6 +41,14 @@ const SearchTrackTemp = ({ track, setTrack, tracksData }: any) => {
           <></>
         )}
       </Center>
+      <Dialog
+        opened={opened}
+        onClose={() => setOpened(false)}
+        size="xl"
+        radius="md"
+      >
+        <Player trackUri={uri}></Player>
+      </Dialog>
     </div>
   );
 };
