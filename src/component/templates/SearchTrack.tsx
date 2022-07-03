@@ -1,5 +1,16 @@
-import { Autocomplete, Button, Center, Dialog, Grid } from "@mantine/core";
+import {
+  ActionIcon,
+  Autocomplete,
+  Button,
+  Center,
+  Dialog,
+  Divider,
+  Grid,
+  Group,
+  Space,
+} from "@mantine/core";
 import React, { useState } from "react";
+import { AiFillCaretRight } from "react-icons/ai";
 import Cards from "../parts/cards/Cards";
 import Player from "../parts/Player";
 
@@ -25,14 +36,28 @@ const SearchTrackTemp = ({ track, setTrack, tracksData, uri, setUri }: any) => {
                   trackName={track.name}
                   artistName={track.artists[0].name}
                 >
-                  <Button
-                    onClick={() => {
-                      setUri(track.uri);
-                      setOpened(true);
-                    }}
-                  >
-                    play
-                  </Button>
+                  <Space h="xs" />
+                  <Group position="center" spacing="xs">
+                    <Button
+                      onClick={() => {}}
+                      variant="subtle"
+                      radius="lg"
+                      color="yellow"
+                    >
+                      Infomation
+                    </Button>
+                    <ActionIcon
+                      onClick={() => {
+                        setUri(track.uri);
+                        setOpened(true);
+                      }}
+                      color="yellow"
+                      variant="outline"
+                      radius="xl"
+                    >
+                      <AiFillCaretRight></AiFillCaretRight>
+                    </ActionIcon>
+                  </Group>
                 </Cards>
               ))}
             </Grid>
@@ -46,8 +71,15 @@ const SearchTrackTemp = ({ track, setTrack, tracksData, uri, setUri }: any) => {
         onClose={() => setOpened(false)}
         size="xl"
         radius="md"
+        position={{ bottom: 10, right: 250 }}
+        // withCloseButton
+        style={{
+          backgroundColor: "#fff",
+          height: 100,
+          width: 950,
+        }}
       >
-        <Player trackUri={uri}></Player>
+        <Player style={{ width: 400, marginRight: 10 }} trackUri={uri}></Player>
       </Dialog>
     </div>
   );
