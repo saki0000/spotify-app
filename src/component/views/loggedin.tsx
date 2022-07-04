@@ -2,7 +2,6 @@ import {
   AppShell,
   Avatar,
   Button,
-  Center,
   Container,
   Group,
   Header,
@@ -58,28 +57,26 @@ function LoggedIn() {
       })}
     >
       <Container>
-        <Center>
-          <Tabs grow color="yellow" position="center" style={{ marginTop: 20 }}>
-            <Tabs.Tab label="Top Artists" style={{ fontSize: 15 }}>
-              <TopArtists />
-            </Tabs.Tab>
-            <Tabs.Tab label="Top Songs" style={{ fontSize: 15 }}>
-              <TopSongs />
-            </Tabs.Tab>
-            <Tabs.Tab label="Search Artists" style={{ fontSize: 15 }}>
-              <SearchArtist />
-            </Tabs.Tab>
-            <Tabs.Tab label="Search Tracks" style={{ fontSize: 15 }}>
-              <SearchTrack />
-            </Tabs.Tab>
-            <Tabs.Tab label="Playlists" style={{ fontSize: 15 }}>
-              <Playlists />
-            </Tabs.Tab>
-            <Tabs.Tab label="New Aubums" style={{ fontSize: 15 }}>
-              <NewAlbum />
-            </Tabs.Tab>
-          </Tabs>
-        </Center>
+        <Tabs grow color="yellow" position="center" style={{ marginTop: 20 }}>
+          <Tabs.Tab label="Top Artists" style={{ fontSize: 15 }}>
+            <TopArtists />
+          </Tabs.Tab>
+          <Tabs.Tab label="Top Songs" style={{ fontSize: 15 }}>
+            <TopSongs />
+          </Tabs.Tab>
+          <Tabs.Tab label="Search Artists" style={{ fontSize: 15 }}>
+            <SearchArtist />
+          </Tabs.Tab>
+          <Tabs.Tab label="Search Tracks" style={{ fontSize: 15 }}>
+            <SearchTrack />
+          </Tabs.Tab>
+          <Tabs.Tab label="Playlists" style={{ fontSize: 15 }}>
+            <Playlists />
+          </Tabs.Tab>
+          <Tabs.Tab label="New Aubums" style={{ fontSize: 15 }}>
+            <NewAlbum />
+          </Tabs.Tab>
+        </Tabs>
       </Container>
     </AppShell>
   );

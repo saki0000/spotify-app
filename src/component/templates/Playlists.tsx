@@ -1,7 +1,6 @@
 import {
   Group,
   Button,
-  Center,
   Stack,
   Avatar,
   Title,
@@ -29,7 +28,7 @@ const PlaylistsTemp = ({
   setDeleteData,
 }: any) => {
   return (
-    <div>
+    <>
       <Group position="center">
         <Button
           radius="xl"
@@ -52,60 +51,55 @@ const PlaylistsTemp = ({
         </Button>
       </Group>
 
-      <Center>
-        <Stack style={{ marginTop: 30 }}>
-          {playlistValue !== {} ? (
-            <Group position="center">
-              {playlistValue.images ? (
-                <Avatar
-                  src={playlistValue.images[2]?.url}
-                  placeholder={image}
-                />
-              ) : (
-                <></>
-              )}
+      <Stack align="stretch" style={{ marginTop: 30 }}>
+        {playlistValue !== {} ? (
+          <Group position="center">
+            {playlistValue.images ? (
+              <Avatar src={playlistValue.images[2]?.url} placeholder={image} />
+            ) : (
+              <></>
+            )}
 
-              <Title>{playlistValue.name}</Title>
-              <Menu>
-                <Menu.Label>Menu</Menu.Label>
-                <Menu.Item
-                  icon={<AiFillTool></AiFillTool>}
-                  onClick={() => setOpened(true)}
-                >
-                  Update
-                </Menu.Item>
-              </Menu>
-            </Group>
-          ) : (
-            <></>
-          )}
+            <Title>{playlistValue.name}</Title>
+            <Menu>
+              <Menu.Label>Menu</Menu.Label>
+              <Menu.Item
+                icon={<AiFillTool></AiFillTool>}
+                onClick={() => setOpened(true)}
+              >
+                Update
+              </Menu.Item>
+            </Menu>
+          </Group>
+        ) : (
+          <></>
+        )}
 
-          {tracksValue ? (
-            <>
-              {tracksValue.map((value: any, index: number) => (
-                <PlaylistTrack
-                  valueId={value.id}
-                  valueImage={value.track.album.images[2]}
-                  valueName={value.track.name}
-                  valueArtistName={value.track.artists[0].name}
+        {tracksValue ? (
+          <>
+            {tracksValue.map((value: any, index: number) => (
+              <PlaylistTrack
+                valueId={value.id}
+                valueImage={value.track.album.images[2]}
+                valueName={value.track.name}
+                valueArtistName={value.track.artists[0].name}
+              >
+                <ActionIcon
+                  onClick={() => {
+                    setOpenedDelete(true);
+                    setDeleteData([value.track.uri, index]);
+                  }}
                 >
-                  <ActionIcon
-                    onClick={() => {
-                      setOpenedDelete(true);
-                      setDeleteData([value.track.uri, index]);
-                    }}
-                  >
-                    <AiFillDelete></AiFillDelete>
-                  </ActionIcon>
-                </PlaylistTrack>
-              ))}
-            </>
-          ) : (
-            <></>
-          )}
-        </Stack>
-      </Center>
-    </div>
+                  <AiFillDelete></AiFillDelete>
+                </ActionIcon>
+              </PlaylistTrack>
+            ))}
+          </>
+        ) : (
+          <></>
+        )}
+      </Stack>
+    </>
   );
 };
 

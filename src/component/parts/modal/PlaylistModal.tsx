@@ -1,14 +1,12 @@
 import {
   Modal,
   Stack,
-  Center,
-  Box,
   Group,
   Avatar,
   ActionIcon,
   Text,
+  Divider,
 } from "@mantine/core";
-import React from "react";
 import { AiFillCheckCircle } from "react-icons/ai";
 
 const PlaylistModal = ({
@@ -18,48 +16,41 @@ const PlaylistModal = ({
   setPlaylistValue,
 }: any) => {
   return (
-    <div>
+    <>
       <Modal
-        size="md"
+        size="sm"
         opened={opened}
         onClose={() => setOpened(false)}
         title="Select a Playlist"
       >
-        <Stack>
+        <Stack align="stretch">
           {playlists ? (
             playlists.map((playlist: any) => (
-              <Center>
-                <Box
-                  sx={(theme) => ({
-                    backgroundColor: theme.colors.gray[2],
-                    textAlign: "center",
-                    padding: theme.spacing.sm,
-                    marginTop: theme.spacing.xs,
-                    borderRadius: theme.radius.md,
-                  })}
-                >
+              <>
+                <Group position="apart" style={{ height: 50 }}>
                   <Group>
                     <Avatar src={playlist.images[0]?.url}></Avatar>
                     <Text>{playlist.name}</Text>
-
-                    <ActionIcon
-                      onClick={() => {
-                        setPlaylistValue(playlist);
-                        setOpened(false);
-                      }}
-                    >
-                      <AiFillCheckCircle size="md"></AiFillCheckCircle>
-                    </ActionIcon>
                   </Group>
-                </Box>
-              </Center>
+
+                  <ActionIcon
+                    onClick={() => {
+                      setPlaylistValue(playlist);
+                      setOpened(false);
+                    }}
+                  >
+                    <AiFillCheckCircle size="md"></AiFillCheckCircle>
+                  </ActionIcon>
+                </Group>
+                <Divider />
+              </>
             ))
           ) : (
             <></>
           )}
         </Stack>
       </Modal>
-    </div>
+    </>
   );
 };
 
