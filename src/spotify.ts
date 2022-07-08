@@ -14,6 +14,10 @@ const scopes = [
   "user-modify-playback-state",
   "playlist-modify-public",
   "user-library-read",
+  "streaming",
+  "user-read-email",
+  "user-read-private",
+  "playlist-modify-private",
 ];
 
 type hash = any;
