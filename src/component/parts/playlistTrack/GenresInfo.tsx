@@ -1,33 +1,23 @@
-import { Grid, Paper, Group, Text, useMantineTheme } from "@mantine/core";
-import React from "react";
+import { Group, Text, Divider, Stack } from "@mantine/core";
 
 const GenresInfo = ({ genresData }: any) => {
-  const theme = useMantineTheme();
   return (
     <div>
       {Object.keys(genresData).map((k) => (
         <>
-          {" "}
-          <Grid grow>
+          <Stack>
             {genresData[k] !== 1 ? (
-              <>
-                <Grid.Col span={6}>
-                  <Paper
-                    style={{ backgroundColor: theme.colors.gray[3] }}
-                    radius="lg"
-                    p="lg"
-                  >
-                    <Group position="center">
-                      <Text>{k}</Text>
-                      <Text>{genresData[k]}</Text>
-                    </Group>
-                  </Paper>
-                </Grid.Col>
-              </>
+              <div style={{ height: 50 }}>
+                <Group position="center">
+                  <Text>{k}</Text>
+                  <Text>{genresData[k]}</Text>
+                </Group>
+                <Divider />
+              </div>
             ) : (
               <></>
             )}
-          </Grid>
+          </Stack>
         </>
       ))}
     </div>
