@@ -17,7 +17,9 @@ const NewAlbumPage = ({ tracksData }: any) => {
                   trackName={track.name}
                   artistName={track.artists[0].name}
                 >
-                  <PlayerButton uri={track.uri}></PlayerButton>
+                  <Center style={{ marginTop: 10 }}>
+                    <PlayerButton uri={track.uri}></PlayerButton>
+                  </Center>
                 </Cards>
               ))}
             </Grid>
