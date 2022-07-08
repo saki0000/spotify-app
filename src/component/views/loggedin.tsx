@@ -11,7 +11,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../features/counter/counterSlice";
 import { selectUser } from "../../features/userSlice";
-import Player from "../parts/Player";
+import Player from "../parts/player/Player";
 import NewAlbum from "./tag/NewAlbum";
 import Playlists from "./tag/Playlists";
 import SearchArtist from "./tag/SearchArtist";

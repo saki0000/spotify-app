@@ -13,12 +13,10 @@ import {
   AiFillCustomerService,
   AiFillTool,
   AiFillDelete,
-  AiFillCaretRight,
 } from "react-icons/ai";
 import PlaylistTrack from "../parts/playlistTrack/PlaylistTrack";
 import image from "../../source/ダウンロード.png";
-import { useDispatch } from "react-redux";
-import { setIsPlayed, setPlayers } from "../../features/playerSlice";
+import PlayerButton from "../parts/player/PlayerButton";
 
 const PlaylistsTemp = ({
   getPlaylists,
@@ -30,7 +28,6 @@ const PlaylistsTemp = ({
   setOpenedDelete,
   setDeleteData,
 }: any) => {
-  const dispatch = useDispatch();
   return (
     <>
       <Group position="center">
@@ -65,17 +62,7 @@ const PlaylistsTemp = ({
             )}
 
             <Title>{playlistValue.name}</Title>
-            <ActionIcon
-              onClick={() => {
-                dispatch(setPlayers(playlistValue.uri));
-                dispatch(setIsPlayed(true));
-              }}
-              color="yellow"
-              variant="outline"
-              radius="xl"
-            >
-              <AiFillCaretRight></AiFillCaretRight>
-            </ActionIcon>
+            <PlayerButton uri={playlistValue.uri}></PlayerButton>
             <Menu>
               <Menu.Label>Menu</Menu.Label>
               <Menu.Item
@@ -100,17 +87,7 @@ const PlaylistsTemp = ({
                 valueArtistName={value.track.artists[0].name}
               >
                 <Group>
-                  <ActionIcon
-                    onClick={() => {
-                      dispatch(setPlayers(value.track.uri));
-                      dispatch(setIsPlayed(true));
-                    }}
-                    color="yellow"
-                    variant="outline"
-                    radius="xl"
-                  >
-                    <AiFillCaretRight></AiFillCaretRight>
-                  </ActionIcon>
+                  <PlayerButton uri={value.track.uri}></PlayerButton>
                   <ActionIcon
                     onClick={() => {
                       setOpenedDelete(true);

@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import SpotifyPlayer from "react-spotify-web-playback";
-import { selectToken } from "../../features/counter/counterSlice";
-import { selectPlayer } from "../../features/playerSlice";
+import { selectToken } from "../../../features/counter/counterSlice";
+import { selectPlayer } from "../../../features/playerSlice";
 
 const Player = ({ trackUri }: any) => {
   const userToken = useSelector(selectToken);

@@ -1,5 +1,4 @@
 import {
-  ActionIcon,
   Autocomplete,
   Button,
   Center,
@@ -7,13 +6,10 @@ import {
   Group,
   Space,
 } from "@mantine/core";
-import { AiFillCaretRight } from "react-icons/ai";
-import { useDispatch } from "react-redux";
-import { setIsPlayed, setPlayers } from "../../features/playerSlice";
 import Cards from "../parts/cards/Cards";
+import PlayerButton from "../parts/player/PlayerButton";
 
 const SearchTrackTemp = ({ track, setTrack, tracksData, uri, setUri }: any) => {
-  const dispatch = useDispatch();
   return (
     <div>
       <Autocomplete
@@ -44,17 +40,7 @@ const SearchTrackTemp = ({ track, setTrack, tracksData, uri, setUri }: any) => {
                     >
                       Infomation
                     </Button>
-                    <ActionIcon
-                      onClick={() => {
-                        dispatch(setPlayers(track.uri));
-                        dispatch(setIsPlayed(true));
-                      }}
-                      color="yellow"
-                      variant="outline"
-                      radius="xl"
-                    >
-                      <AiFillCaretRight></AiFillCaretRight>
-                    </ActionIcon>
+                    <PlayerButton uri={track.uri}></PlayerButton>
                   </Group>
                 </Cards>
               ))}
