@@ -11,7 +11,6 @@ import { AiFillCaretRight } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { setIsPlayed, setPlayers } from "../../features/playerSlice";
 import Cards from "../parts/cards/Cards";
-import Player from "../parts/Player";
 
 const SearchTrackTemp = ({ track, setTrack, tracksData, uri, setUri }: any) => {
   const dispatch = useDispatch();
@@ -65,8 +64,6 @@ const SearchTrackTemp = ({ track, setTrack, tracksData, uri, setUri }: any) => {
           <></>
         )}
       </Center>
-
-      <Player></Player>
     </div>
   );
 };

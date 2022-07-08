@@ -99,14 +99,27 @@ const PlaylistsTemp = ({
                 valueName={value.track.name}
                 valueArtistName={value.track.artists[0].name}
               >
-                <ActionIcon
-                  onClick={() => {
-                    setOpenedDelete(true);
-                    setDeleteData([value.track.uri, index]);
-                  }}
-                >
-                  <AiFillDelete></AiFillDelete>
-                </ActionIcon>
+                <Group>
+                  <ActionIcon
+                    onClick={() => {
+                      dispatch(setPlayers(value.track.uri));
+                      dispatch(setIsPlayed(true));
+                    }}
+                    color="yellow"
+                    variant="outline"
+                    radius="xl"
+                  >
+                    <AiFillCaretRight></AiFillCaretRight>
+                  </ActionIcon>
+                  <ActionIcon
+                    onClick={() => {
+                      setOpenedDelete(true);
+                      setDeleteData([value.track.uri, index]);
+                    }}
+                  >
+                    <AiFillDelete></AiFillDelete>
+                  </ActionIcon>
+                </Group>
               </PlaylistTrack>
             ))}
           </>

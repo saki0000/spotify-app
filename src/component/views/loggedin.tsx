@@ -79,7 +79,9 @@ function LoggedIn() {
           </Tabs.Tab>
         </Tabs>
 
-        <Player style={{ width: 400, marginRight: 10 }}></Player>
+        <Player
+          style={{ width: 300, marginRight: 10, bottom: 10, right: 10 }}
+        ></Player>
       </Container>
     </AppShell>
   );

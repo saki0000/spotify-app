@@ -1,14 +1,16 @@
-import { Dialog } from "@mantine/core";
+import { ActionIcon, Group, Paper } from "@mantine/core";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
+import { useSelector } from "react-redux";
 import SpotifyPlayer from "react-spotify-web-playback";
 import { selectToken } from "../../features/counter/counterSlice";
-import { selectPlayer, setIsPlayed } from "../../features/playerSlice";
+import { selectPlayer } from "../../features/playerSlice";
 
 const Player = ({ trackUri }: any) => {
   const userToken = useSelector(selectToken);
   const player = useSelector(selectPlayer);
-  const dispatch = useDispatch();
+  const [opened, setOpened] = useState({ open: "", close: "none" });
+
   const [play, setPlay] = useState(false);
 
   useEffect(() => {
@@ -17,39 +19,51 @@ const Player = ({ trackUri }: any) => {
 
   if (!userToken) return null;
   return (
-    <>
-      <Dialog
-        opened={player.isPlayed}
-        onClose={() => dispatch(setIsPlayed(false))}
-        size="xl"
-        radius="md"
-        position={{ bottom: 10, right: 250 }}
-        // withCloseButton
-        style={{
-          backgroundColor: "#fff",
-          height: 100,
-          width: 950,
-        }}
-      >
-        <SpotifyPlayer
-          token={userToken}
-          showSaveIcon
-          callback={(state) => !state.isPlaying && setPlay(false)}
-          play={play}
-          uris={player.isPlayed ? player.currentTrack : []}
-          styles={{
-            activeColor: "#25262B",
-            bgColor: "#fff",
-            color: "#25262B",
-            loaderColor: "#25262B",
-            sliderColor: "#FFD43B",
-            trackArtistColor: "#5C5F66",
-            trackNameColor: "#25262B",
-            height: "65px",
-          }}
-        />
-      </Dialog>
-    </>
+    <div style={{ position: "fixed", bottom: 10, right: 30 }}>
+      {player.isPlayed ? (
+        <>
+          <Paper style={{ width: 600, padding: 20, display: opened.open }}>
+            <Group>
+              <ActionIcon
+                onClick={() => {
+                  setOpened({ open: "none", close: "" });
+                }}
+              >
+                <AiOutlineRight></AiOutlineRight>
+              </ActionIcon>
+
+              <SpotifyPlayer
+                token={userToken}
+                showSaveIcon
+                callback={(state) => !state.isPlaying && setPlay(false)}
+                play={play}
+                uris={player.isPlayed ? player.currentTrack : []}
+                styles={{
+                  activeColor: "#25262B",
+                  bgColor: "#fff",
+                  color: "#25262B",
+                  loaderColor: "#25262B",
+                  sliderColor: "#FFD43B",
+                  trackArtistColor: "#5C5F66",
+                  trackNameColor: "#25262B",
+                  height: "65px",
+                }}
+              />
+            </Group>
+          </Paper>
+          <ActionIcon
+            onClick={() => {
+              setOpened({ open: "", close: "none" });
+            }}
+            style={{ display: opened.close }}
+          >
+            <AiOutlineLeft></AiOutlineLeft>
+          </ActionIcon>
+        </>
+      ) : (
+        <></>
+      )}
+    </div>
   );
 };
 
