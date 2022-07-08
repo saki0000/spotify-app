@@ -19,10 +19,10 @@ const Player = ({ trackUri }: any) => {
 
   if (!userToken) return null;
   return (
-    <div style={{ position: "fixed", bottom: 10, right: 30 }}>
+    <div style={{ position: "fixed", bottom: 15, right: 30 }}>
       {player.isPlayed ? (
         <>
-          <Paper style={{ width: 600, padding: 20, display: opened.open }}>
+          <Paper style={{ width: 600, padding: 10, display: opened.open }}>
             <Group>
               <ActionIcon
                 onClick={() => {
