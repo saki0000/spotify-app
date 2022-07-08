@@ -7,15 +7,18 @@ import {
   Menu,
   ActionIcon,
 } from "@mantine/core";
-import React from "react";
+
 import {
   AiFillCaretDown,
   AiFillCustomerService,
   AiFillTool,
   AiFillDelete,
+  AiFillCaretRight,
 } from "react-icons/ai";
 import PlaylistTrack from "../parts/playlistTrack/PlaylistTrack";
 import image from "../../source/ダウンロード.png";
+import { useDispatch } from "react-redux";
+import { setIsPlayed, setPlayers } from "../../features/playerSlice";
 
 const PlaylistsTemp = ({
   getPlaylists,
@@ -27,6 +30,7 @@ const PlaylistsTemp = ({
   setOpenedDelete,
   setDeleteData,
 }: any) => {
+  const dispatch = useDispatch();
   return (
     <>
       <Group position="center">
@@ -53,7 +57,7 @@ const PlaylistsTemp = ({
 
       <Stack align="stretch" style={{ marginTop: 30 }}>
         {playlistValue !== {} ? (
-          <Group position="center">
+          <Group position="center" style={{ marginBottom: 20 }}>
             {playlistValue.images ? (
               <Avatar src={playlistValue.images[2]?.url} placeholder={image} />
             ) : (
@@ -61,6 +65,17 @@ const PlaylistsTemp = ({
             )}
 
             <Title>{playlistValue.name}</Title>
+            <ActionIcon
+              onClick={() => {
+                dispatch(setPlayers(playlistValue.uri));
+                dispatch(setIsPlayed(true));
+              }}
+              color="yellow"
+              variant="outline"
+              radius="xl"
+            >
+              <AiFillCaretRight></AiFillCaretRight>
+            </ActionIcon>
             <Menu>
               <Menu.Label>Menu</Menu.Label>
               <Menu.Item

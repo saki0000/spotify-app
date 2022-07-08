@@ -3,18 +3,18 @@ import {
   Autocomplete,
   Button,
   Center,
-  Dialog,
   Grid,
   Group,
   Space,
 } from "@mantine/core";
-import React, { useState } from "react";
 import { AiFillCaretRight } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import { setIsPlayed, setPlayers } from "../../features/playerSlice";
 import Cards from "../parts/cards/Cards";
 import Player from "../parts/Player";
 
 const SearchTrackTemp = ({ track, setTrack, tracksData, uri, setUri }: any) => {
-  const [opened, setOpened] = useState(false);
+  const dispatch = useDispatch();
   return (
     <div>
       <Autocomplete
@@ -47,8 +47,8 @@ const SearchTrackTemp = ({ track, setTrack, tracksData, uri, setUri }: any) => {
                     </Button>
                     <ActionIcon
                       onClick={() => {
-                        setUri(track.uri);
-                        setOpened(true);
+                        dispatch(setPlayers(track.uri));
+                        dispatch(setIsPlayed(true));
                       }}
                       color="yellow"
                       variant="outline"
@@ -65,21 +65,8 @@ const SearchTrackTemp = ({ track, setTrack, tracksData, uri, setUri }: any) => {
           <></>
         )}
       </Center>
-      <Dialog
-        opened={opened}
-        onClose={() => setOpened(false)}
-        size="xl"
-        radius="md"
-        position={{ bottom: 10, right: 250 }}
-        // withCloseButton
-        style={{
-          backgroundColor: "#fff",
-          height: 100,
-          width: 950,
-        }}
-      >
-        <Player style={{ width: 400, marginRight: 10 }} trackUri={uri}></Player>
-      </Dialog>
+
+      <Player></Player>
     </div>
   );
 };

@@ -37,7 +37,6 @@ const TopArtistTemp = ({
         <Accordion iconPosition="right" style={{ marginBottom: 20 }}>
           <Accordion.Item label="Your Top Genres">
             <GenresInfo genresData={genresData} />
-            <div style={{ marginBottom: 400 }}></div>
           </Accordion.Item>
         </Accordion>
       </Stack>
