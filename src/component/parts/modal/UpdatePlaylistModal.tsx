@@ -1,4 +1,4 @@
-import { Modal, Center, Stack, Autocomplete, ActionIcon } from "@mantine/core";
+import { Modal, Stack, Autocomplete, ActionIcon } from "@mantine/core";
 import { AiOutlinePlus } from "react-icons/ai";
 import PlaylistTrack from "../playlistTrack/PlaylistTrack";
 
@@ -19,40 +19,38 @@ const UpdatePlaylistModal = ({
         onClose={() => setOpened(false)}
         title={"Update the Playlist"}
       >
-        <Center>
-          <Stack style={{ marginTop: 30 }}>
-            <Autocomplete
-              value={searchTracks}
-              data={[]}
-              onChange={setSearchTracks}
-              placeholder="Search Tracks"
-            ></Autocomplete>
-            {tracksData ? (
-              <>
-                {tracksData.map((value: any) => (
-                  <PlaylistTrack
-                    valueId={value.id}
-                    valueImage={value.album.images[2]}
-                    valueName={value.name}
-                    valueArtistName={value.artists[0].name}
+        <Stack align="stretch" style={{ marginTop: 30 }}>
+          <Autocomplete
+            value={searchTracks}
+            data={[]}
+            onChange={setSearchTracks}
+            placeholder="Search Tracks"
+          ></Autocomplete>
+          {tracksData ? (
+            <>
+              {tracksData.map((value: any) => (
+                <PlaylistTrack
+                  valueId={value.id}
+                  valueImage={value.album.images[2]}
+                  valueName={value.name}
+                  valueArtistName={value.artists[0].name}
+                >
+                  <ActionIcon
+                    onClick={() => {
+                      updatePlaylists(value.uri);
+                      getTracks(searchTracks);
+                      setOpened(false);
+                    }}
                   >
-                    <ActionIcon
-                      onClick={() => {
-                        updatePlaylists(value.uri);
-                        getTracks(searchTracks);
-                        setOpened(false);
-                      }}
-                    >
-                      <AiOutlinePlus>add</AiOutlinePlus>
-                    </ActionIcon>
-                  </PlaylistTrack>
-                ))}
-              </>
-            ) : (
-              <></>
-            )}
-          </Stack>
-        </Center>
+                    <AiOutlinePlus>add</AiOutlinePlus>
+                  </ActionIcon>
+                </PlaylistTrack>
+              ))}
+            </>
+          ) : (
+            <></>
+          )}
+        </Stack>
       </Modal>
     </div>
   );
