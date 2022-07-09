@@ -40,7 +40,7 @@ export const accessUrl = `${authEndpoint}?client_id=${clientId}&redirect_uri=${r
   "%20"
 )}&response_type=token&show_dialog=true`;
 
-export const searchArtists = async (
+export const searchTracks = async (
   terms: string,
   token: string,
   setSongs: any
@@ -58,6 +58,31 @@ export const searchArtists = async (
     )
     .then((res: any) => {
       setSongs(res.data.items);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const searchArtists = async (
+  terms: string,
+  token: string,
+  setArtists: any
+) => {
+  await axios
+    .get(
+      `https://api.spotify.com/v1/me/top/artists?time_range=${terms}&limit=40`,
+      {
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    )
+    .then((res: any) => {
+      setArtists(res.data.items);
+      console.log(res.data.items);
     })
     .catch((err) => {
       console.log(err);
