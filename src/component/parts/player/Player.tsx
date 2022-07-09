@@ -1,4 +1,4 @@
-import { ActionIcon, Group, Paper } from "@mantine/core";
+import { ActionIcon, Group, Paper, Text } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import { useSelector } from "react-redux";
@@ -22,8 +22,8 @@ const Player = ({ trackUri }: any) => {
     <div style={{ position: "fixed", bottom: 15, right: 30 }}>
       {player.isPlayed ? (
         <>
-          <Paper style={{ width: 600, padding: 10, display: opened.open }}>
-            <Group>
+          <Paper style={{ width: 670, padding: 10, display: opened.open }}>
+            <Group position="center">
               <ActionIcon
                 onClick={() => {
                   setOpened({ open: "none", close: "" });
@@ -31,34 +31,37 @@ const Player = ({ trackUri }: any) => {
               >
                 <AiOutlineRight></AiOutlineRight>
               </ActionIcon>
-
-              <SpotifyPlayer
-                token={userToken}
-                showSaveIcon
-                callback={(state) => !state.isPlaying && setPlay(false)}
-                play={play}
-                uris={player.isPlayed ? player.currentTrack : []}
-                styles={{
-                  activeColor: "#25262B",
-                  bgColor: "#fff",
-                  color: "#25262B",
-                  loaderColor: "#25262B",
-                  sliderColor: "#FFD43B",
-                  trackArtistColor: "#5C5F66",
-                  trackNameColor: "#25262B",
-                  height: "65px",
-                }}
-              />
+              <div style={{ width: 600 }}>
+                <SpotifyPlayer
+                  token={userToken}
+                  showSaveIcon
+                  callback={(state) => !state.isPlaying && setPlay(false)}
+                  play={play}
+                  uris={player.isPlayed ? player.currentTrack : []}
+                  styles={{
+                    activeColor: "#25262B",
+                    bgColor: "#fff",
+                    color: "#25262B",
+                    loaderColor: "#25262B",
+                    sliderColor: "#FFD43B",
+                    trackArtistColor: "#5C5F66",
+                    trackNameColor: "#25262B",
+                    height: "65px",
+                  }}
+                />
+              </div>
             </Group>
           </Paper>
-          <ActionIcon
-            onClick={() => {
-              setOpened({ open: "", close: "none" });
-            }}
-            style={{ display: opened.close }}
-          >
-            <AiOutlineLeft></AiOutlineLeft>
-          </ActionIcon>
+          <Group spacing={0} style={{ display: opened.close, margin: 35 }}>
+            <ActionIcon
+              onClick={() => {
+                setOpened({ open: "", close: "none" });
+              }}
+            >
+              <AiOutlineLeft></AiOutlineLeft>
+            </ActionIcon>
+            <Text color="grey">Player</Text>
+          </Group>
         </>
       ) : (
         <></>
