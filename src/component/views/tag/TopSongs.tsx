@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../../features/counter/counterSlice";
-import { searchTracks } from "../../../spotify";
+import { searchTopTracks } from "../../../spotify";
 import useTrackFeature from "../../custom hooks/useTrackFeature";
 import SongsInfoModal from "../../parts/modal/SongsInfoModal";
 import TopTrackTemp from "../../templates/TopTrack";
@@ -15,7 +15,7 @@ const TopSongs = () => {
   const [featureRow, setTrackFeature] = useTrackFeature();
 
   useEffect(() => {
-    searchTracks(terms, token, setSongs);
+    searchTopTracks(terms, token, setSongs);
   }, [terms]);
   return (
     <div>

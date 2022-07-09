@@ -1,7 +1,7 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../../features/counter/counterSlice";
+import { searchArtist } from "../../../spotify";
 import SearchArtistTemp from "../../templates/SearchArtist";
 
 const SearchArtist = () => {
@@ -9,25 +9,8 @@ const SearchArtist = () => {
   const [artist, setArtist] = useState("");
   const [artistsData, setArtistsData] = useState<any>();
 
-  const searchArtist = async () => {
-    await axios
-      .get(`https://api.spotify.com/v1/search?q=${artist}&type=artist`, {
-        headers: {
-          Accept: "application/json",
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      })
-      .then((res: any) => {
-        setArtistsData(res.data.artists.items);
-        console.log(artistsData);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
   useEffect(() => {
-    searchArtist();
+    searchArtist(artist, token, setArtistsData);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [artist]);
   return (

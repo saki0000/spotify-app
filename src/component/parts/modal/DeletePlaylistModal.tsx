@@ -1,15 +1,21 @@
 import { Modal, Title, Group, Button } from "@mantine/core";
 import React from "react";
+import { useSelector } from "react-redux";
+import { selectToken } from "../../../features/counter/counterSlice";
+import { deleteTrack } from "../../../spotify";
 
 const DeletePlaylistModal = ({
   opened,
   setOpened,
-  deleteTrack,
+  // deleteTrack,
   deleteData,
   tracksValue,
   setTracksValue,
   setDeleteData,
+  playlistValue,
 }: any) => {
+  const userToken = useSelector(selectToken);
+
   return (
     <div>
       <Modal
@@ -23,7 +29,7 @@ const DeletePlaylistModal = ({
           <Button
             color="yellow"
             onClick={() => {
-              deleteTrack(deleteData[0]);
+              deleteTrack(deleteData[0], playlistValue.id, userToken);
               const newAry = [...tracksValue].splice(
                 deleteData[1] + 1,
                 tracksValue.length - 1

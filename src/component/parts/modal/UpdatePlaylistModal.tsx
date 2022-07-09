@@ -1,5 +1,8 @@
 import { Modal, Stack, Autocomplete, ActionIcon } from "@mantine/core";
 import { AiOutlinePlus } from "react-icons/ai";
+import { useSelector } from "react-redux";
+import { selectToken } from "../../../features/counter/counterSlice";
+import { getPlaylistTracks, updatePlaylists } from "../../../spotify";
 import PlaylistTrack from "../playlistTrack/PlaylistTrack";
 
 const UpdatePlaylistModal = ({
@@ -8,9 +11,10 @@ const UpdatePlaylistModal = ({
   searchTracks,
   setSearchTracks,
   tracksData,
-  updatePlaylists,
-  getTracks,
+  playlistValue,
+  setTracksValue,
 }: any) => {
+  const userToken = useSelector(selectToken);
   return (
     <div>
       <Modal
@@ -37,8 +41,17 @@ const UpdatePlaylistModal = ({
                 >
                   <ActionIcon
                     onClick={() => {
-                      updatePlaylists(value.uri);
-                      getTracks(searchTracks);
+                      updatePlaylists(
+                        value.uri,
+                        userToken,
+                        getPlaylistTracks,
+                        playlistValue
+                      );
+                      getPlaylistTracks(
+                        playlistValue,
+                        userToken,
+                        setTracksValue
+                      );
                       setOpened(false);
                     }}
                   >

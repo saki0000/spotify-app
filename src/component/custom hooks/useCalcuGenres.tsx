@@ -1,7 +1,7 @@
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../features/counter/counterSlice";
-import { searchArtists } from "../../spotify";
+import { searchTopArtists } from "../../spotify";
 
 const useCalcuGenres = () => {
   const [genresData, setGenresData] = useState<any>({});
@@ -39,7 +39,7 @@ const useCalcuGenres = () => {
     caluculate(artists);
   }, [artists]);
   useEffect(() => {
-    searchArtists(terms, token, setArtists);
+    searchTopArtists(terms, token, setArtists);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [terms]);
   return [artists, genresData, terms, setTerms];
