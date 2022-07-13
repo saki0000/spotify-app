@@ -39,7 +39,7 @@ const PlaylistModal = ({
                       setOpened(false);
                     }}
                   >
-                    <AiFillCheckCircle size="md"></AiFillCheckCircle>
+                    <AiFillCheckCircle size="sm"></AiFillCheckCircle>
                   </ActionIcon>
                 </Group>
                 <Divider />

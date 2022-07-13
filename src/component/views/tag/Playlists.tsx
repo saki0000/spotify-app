@@ -18,7 +18,7 @@ const Playlists = () => {
   const [
     playlists,
     tracksValue,
-    tracksData,
+    searchTracksData,
     playlistValue,
     searchTrack,
     setTracksValue,
@@ -40,7 +40,7 @@ const Playlists = () => {
         setOpened={setOpened}
         searchTracks={searchTrack}
         setSearchTracks={setSearchTrack}
-        tracksData={tracksData}
+        tracksData={searchTracksData}
         playlistValue={playlistValue}
       />
       <DeletePlaylistModal

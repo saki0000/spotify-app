@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../features/counter/counterSlice";
 import { selectUser } from "../../features/userSlice";
 import Player from "../parts/player/Player";
+import Recommendation from "../templates/Recommendation";
 import NewAlbum from "./tag/NewAlbum";
 import Playlists from "./tag/Playlists";
 import SearchArtist from "./tag/SearchArtist";
@@ -76,6 +77,9 @@ function LoggedIn() {
           </Tabs.Tab>
           <Tabs.Tab label="New Aubums" style={{ fontSize: 15 }}>
             <NewAlbum />
+          </Tabs.Tab>
+          <Tabs.Tab label="Recommende" style={{ fontSize: 15 }}>
+            <Recommendation />
           </Tabs.Tab>
         </Tabs>
 

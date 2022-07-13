@@ -271,3 +271,30 @@ export const getPlaylistTracks = async (
       console.log(err);
     });
 };
+
+export const getRecommendations = async (
+  artistID: string,
+  genre: string,
+  trackID: string,
+  userToken: string,
+  setRecommendation: any
+) => {
+  await axios
+    .get(
+      `https://api.spotify.com/v1/recommendations?seed_artists=${artistID}&seed_genres=${genre}&seed_tracks=${trackID}`,
+      {
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${userToken}`,
+          "Content-Type": "application/json",
+        },
+      }
+    )
+    .then((res) => {
+      setRecommendation(res.data.tracks);
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
