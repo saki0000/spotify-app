@@ -273,7 +273,7 @@ export const getPlaylistTracks = async (
 };
 
 export const getRecommendations = async (
-  // artistID: string,
+  artistID: string,
   genre: string,
   trackID: string,
   userToken: string,
@@ -281,7 +281,7 @@ export const getRecommendations = async (
 ) => {
   await axios
     .get(
-      `https://api.spotify.com/v1/recommendations?seed_artists=&seed_genres=${genre}&seed_tracks=${trackID}`,
+      `https://api.spotify.com/v1/recommendations?seed_artists=${artistID}&seed_genres=${genre}&seed_tracks=${trackID}`,
       {
         headers: {
           Accept: "application/json",

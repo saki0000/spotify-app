@@ -3,16 +3,16 @@ import { useEffect, useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../../features/counter/counterSlice";
-import { searchTracks } from "../../../spotify";
+import { searchArtist } from "../../../spotify";
 import PlaylistTrack from "../playlistTrack/PlaylistTrack";
 
-const RecommendeModal = ({ opened, setOpened, setSeedTrack }: any) => {
+const ArtistModal = ({ opened, setOpened, setSeedArtist }: any) => {
   const userToken = useSelector(selectToken);
-  const [searchTrack, setSearchTrack] = useState<string>("");
-  const [tracksData, setTracksData] = useState<any>();
+  const [search, setSearchArtist] = useState<string>("");
+  const [artistData, setArtistData] = useState<any>();
   useEffect(() => {
-    searchTracks(searchTrack, userToken, setTracksData);
-  }, [searchTrack, userToken]);
+    searchArtist(search, userToken, setArtistData);
+  }, [search, userToken]);
   return (
     <div>
       <Modal
@@ -23,26 +23,24 @@ const RecommendeModal = ({ opened, setOpened, setSeedTrack }: any) => {
       >
         <Stack align="stretch" style={{ marginTop: 30 }}>
           <Autocomplete
-            value={searchTrack}
+            value={search}
             data={[]}
-            onChange={setSearchTrack}
+            onChange={setSearchArtist}
             placeholder="Search Tracks"
           ></Autocomplete>
-          {tracksData ? (
+          {artistData ? (
             <>
-              {tracksData.map((value: any) => (
+              {artistData.map((value: any) => (
                 <PlaylistTrack
                   valueId={value.id}
-                  valueImage={value.album.images[2]}
-                  valueName={value.name}
-                  valueArtistName={value.artists[0].name}
+                  valueImage={value.images[2]}
+                  valueArtistName={value.name}
                 >
                   <ActionIcon
                     onClick={() => {
-                      setSeedTrack({
+                      setSeedArtist({
                         id: value.id,
-                        image: value.album.images[2].url,
-                        artist: value.artists[0].name,
+                        image: value.images[2].url,
                         name: value.name,
                       });
                       setOpened(false);
@@ -62,4 +60,4 @@ const RecommendeModal = ({ opened, setOpened, setSeedTrack }: any) => {
   );
 };
 
-export default RecommendeModal;
+export default ArtistModal;
