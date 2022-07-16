@@ -18,7 +18,7 @@ const RecommendeModal = ({ opened, setOpened, setSeedTrack }: any) => {
       <Modal
         size="xl"
         opened={opened}
-        onClose={() => setOpened(false)}
+        onClose={() => setOpened({ track: false, genre: false })}
         title={"Update the Playlist"}
       >
         <Stack align="stretch" style={{ marginTop: 30 }}>
