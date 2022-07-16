@@ -25,7 +25,7 @@ const SeedArtist = ({ setOpened, seedArtist, setSeedArtist }: any) => {
             <Text>Seed Artist</Text>
             <ActionIcon
               onClick={() => {
-                setOpened({ artist: true, track: false, genre: false });
+                setOpened({ artist: true });
               }}
             >
               <AiOutlinePlus></AiOutlinePlus>

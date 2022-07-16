@@ -1,8 +1,16 @@
-import { Group, Stack, ActionIcon, Image, Text } from "@mantine/core";
+import {
+  Group,
+  Stack,
+  ActionIcon,
+  Image,
+  Text,
+  useMantineTheme,
+} from "@mantine/core";
 import React from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
 const SeedTrack = ({ seedTrack, setSeedTrack, setOpened }: any) => {
+  const theme = useMantineTheme();
   return (
     <div>
       {seedTrack.id !== "" ? (
@@ -11,7 +19,9 @@ const SeedTrack = ({ seedTrack, setSeedTrack, setOpened }: any) => {
             <Image src={seedTrack.image}></Image>
             <Stack>
               <Text>{seedTrack.name}</Text>
-              <Text>{seedTrack.artist}</Text>
+              <Text size="sm" color={theme.colors.dark[4]}>
+                {seedTrack.artist}
+              </Text>
             </Stack>
 
             <ActionIcon
@@ -34,7 +44,7 @@ const SeedTrack = ({ seedTrack, setSeedTrack, setOpened }: any) => {
             <Text>Seed Track</Text>
             <ActionIcon
               onClick={() => {
-                setOpened({ artist: false, track: true, genre: false });
+                setOpened({ track: true });
               }}
             >
               <AiOutlinePlus></AiOutlinePlus>

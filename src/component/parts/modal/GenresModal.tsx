@@ -35,7 +35,7 @@ const GenresModal = ({ setSeedGenre, setOpened }: any) => {
                   size="lg"
                   onClick={() => {
                     setSeedGenre(genre);
-                    setOpened({ track: false, genre: false });
+                    setOpened({ genre: false });
                   }}
                 >
                   {genre}

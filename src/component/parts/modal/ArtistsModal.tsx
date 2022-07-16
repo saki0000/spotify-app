@@ -18,7 +18,7 @@ const ArtistModal = ({ opened, setOpened, setSeedArtist }: any) => {
       <Modal
         size="xl"
         opened={opened}
-        onClose={() => setOpened({ track: false, genre: false })}
+        onClose={() => setOpened({ artist: false })}
         title={"Update the Playlist"}
       >
         <Stack align="stretch" style={{ marginTop: 30 }}>
@@ -33,7 +33,7 @@ const ArtistModal = ({ opened, setOpened, setSeedArtist }: any) => {
               {artistData.map((value: any) => (
                 <PlaylistTrack
                   valueId={value.id}
-                  valueImage={value.images[2]}
+                  valueImage={value.images[1]}
                   valueArtistName={value.name}
                 >
                   <ActionIcon
@@ -43,7 +43,7 @@ const ArtistModal = ({ opened, setOpened, setSeedArtist }: any) => {
                         image: value.images[2].url,
                         name: value.name,
                       });
-                      setOpened(false);
+                      setOpened({ artist: false });
                     }}
                   >
                     <AiOutlinePlus>add</AiOutlinePlus>

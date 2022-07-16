@@ -22,7 +22,7 @@ const SeedGenre = ({ seedGenre, setSeedGenre, setOpened }: any) => {
             <Text>Seed Genre</Text>
             <ActionIcon
               onClick={() => {
-                setOpened({ artist: false, track: false, genre: true });
+                setOpened({ genre: true });
               }}
             >
               <AiOutlinePlus></AiOutlinePlus>

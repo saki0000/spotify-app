@@ -18,7 +18,7 @@ const RecommendeModal = ({ opened, setOpened, setSeedTrack }: any) => {
       <Modal
         size="xl"
         opened={opened}
-        onClose={() => setOpened({ track: false, genre: false })}
+        onClose={() => setOpened({ track: false })}
         title={"Update the Playlist"}
       >
         <Stack align="stretch" style={{ marginTop: 30 }}>
@@ -45,7 +45,7 @@ const RecommendeModal = ({ opened, setOpened, setSeedTrack }: any) => {
                         artist: value.artists[0].name,
                         name: value.name,
                       });
-                      setOpened(false);
+                      setOpened({ track: false });
                     }}
                   >
                     <AiOutlinePlus>add</AiOutlinePlus>

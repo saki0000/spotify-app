@@ -1,4 +1,5 @@
 import { ActionIcon, Divider, Grid, Group, Modal } from "@mantine/core";
+import { useSetState } from "@mantine/hooks";
 import { useEffect, useState } from "react";
 import { AiOutlineReload } from "react-icons/ai";
 import { useSelector } from "react-redux";
@@ -14,7 +15,7 @@ import SeedTrack from "../parts/recommendation/SeedTrack";
 
 const Recommendation = () => {
   const userToken = useSelector(selectToken);
-  const [opened, setOpened] = useState<any>({
+  const [opened, setOpened] = useSetState<any>({
     artist: false,
     track: false,
     genre: false,
@@ -43,7 +44,7 @@ const Recommendation = () => {
   }, [seedArtist, seedGenre, seedTrack, userToken]);
   return (
     <div>
-      <Group position="center" style={{ height: 150 }}>
+      <Group position="apart" style={{ height: 150 }}>
         <SeedArtist
           setOpened={setOpened}
           seedArtist={seedArtist}
