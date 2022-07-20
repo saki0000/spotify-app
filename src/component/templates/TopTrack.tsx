@@ -32,6 +32,7 @@ const TopTrackTemp = ({
               image={song.album.images[1].url}
               trackName={song.name}
               artistName={song.artists[0].name}
+              uri={song.uri}
             >
               <Button
                 onClick={() => {

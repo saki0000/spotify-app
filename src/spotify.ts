@@ -277,11 +277,12 @@ export const getRecommendations = async (
   genre: string,
   trackID: string,
   userToken: string,
+  popularity: number,
   setRecommendation: any
 ) => {
   await axios
     .get(
-      `https://api.spotify.com/v1/recommendations?seed_artists=${artistID}&seed_genres=${genre}&seed_tracks=${trackID}`,
+      `https://api.spotify.com/v1/recommendations?seed_artists=${artistID}&seed_genres=${genre}&seed_tracks=${trackID}&target_popularity=${popularity}&limit=40`,
       {
         headers: {
           Accept: "application/json",

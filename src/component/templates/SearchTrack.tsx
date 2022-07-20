@@ -7,7 +7,6 @@ import {
   Space,
 } from "@mantine/core";
 import Cards from "../parts/cards/Cards";
-import PlayerButton from "../parts/player/PlayerButton";
 
 const SearchTrackTemp = ({ track, setTrack, tracksData, uri, setUri }: any) => {
   return (
@@ -29,6 +28,7 @@ const SearchTrackTemp = ({ track, setTrack, tracksData, uri, setUri }: any) => {
                   image={track.album.images[1].url}
                   trackName={track.name}
                   artistName={track.artists[0].name}
+                  uri={track.uri}
                 >
                   <Space h="xs" />
                   <Group position="center" spacing="xs">
@@ -40,7 +40,6 @@ const SearchTrackTemp = ({ track, setTrack, tracksData, uri, setUri }: any) => {
                     >
                       Infomation
                     </Button>
-                    <PlayerButton uri={track.uri}></PlayerButton>
                   </Group>
                 </Cards>
               ))}

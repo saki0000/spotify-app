@@ -62,7 +62,11 @@ const PlaylistsTemp = ({
             )}
 
             <Title>{playlistValue.name}</Title>
-            <PlayerButton uri={playlistValue.uri}></PlayerButton>
+            <PlayerButton
+              uri={playlistValue.uri}
+              size="lg"
+              variant="outline"
+            ></PlayerButton>
             <Menu>
               <Menu.Label>Menu</Menu.Label>
               <Menu.Item
@@ -87,7 +91,11 @@ const PlaylistsTemp = ({
                 valueArtistName={value.track.artists[0].name}
               >
                 <Group>
-                  <PlayerButton uri={value.track.uri}></PlayerButton>
+                  <PlayerButton
+                    uri={value.track.uri}
+                    size="md"
+                    variant="outline"
+                  ></PlayerButton>
                   <ActionIcon
                     onClick={() => {
                       setOpenedDelete(true);

@@ -16,7 +16,7 @@ const SeedTrack = ({ seedTrack, setSeedTrack, setOpened }: any) => {
       {seedTrack.id !== "" ? (
         <>
           <Group>
-            <Image src={seedTrack.image}></Image>
+            <Image width={80} height={80} src={seedTrack.image}></Image>
             <Stack>
               <Text>{seedTrack.name}</Text>
               <Text size="sm" color={theme.colors.dark[4]}>

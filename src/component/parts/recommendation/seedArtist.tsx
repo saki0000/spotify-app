@@ -8,7 +8,7 @@ const SeedArtist = ({ setOpened, seedArtist, setSeedArtist }: any) => {
       {seedArtist.id !== "" ? (
         <>
           <Group>
-            <Image src={seedArtist.image}></Image>
+            <Image height={80} width={80} src={seedArtist.image}></Image>
             <Text>{seedArtist.name}</Text>
             <ActionIcon
               onClick={() => {

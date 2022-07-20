@@ -1,4 +1,4 @@
-import { ActionIcon, Divider, Grid, Group, Modal } from "@mantine/core";
+import { ActionIcon, Divider, Grid, Group, Modal, Slider } from "@mantine/core";
 import { useSetState } from "@mantine/hooks";
 import { useEffect, useState } from "react";
 import { AiOutlineReload } from "react-icons/ai";
@@ -32,6 +32,8 @@ const Recommendation = () => {
     name: "",
   });
   const [seedGenre, setSeedGenre] = useState<string>("");
+  const [slider, setSlider] = useState<number>(50);
+  const [popularity, setPopularity] = useState<number>(50);
   const [recommendedTrack, setReacommendedTrack] = useState<any>();
   useEffect(() => {
     getRecommendations(
@@ -39,9 +41,10 @@ const Recommendation = () => {
       seedGenre,
       seedTrack.id,
       userToken,
+      popularity,
       setReacommendedTrack
     );
-  }, [seedArtist, seedGenre, seedTrack, userToken]);
+  }, [seedArtist, seedGenre, seedTrack, userToken, popularity]);
   return (
     <div>
       <Group position="apart" style={{ height: 150 }}>
@@ -67,6 +70,7 @@ const Recommendation = () => {
               seedGenre,
               seedTrack.id,
               userToken,
+              popularity,
               setReacommendedTrack
             );
           }}
@@ -74,6 +78,13 @@ const Recommendation = () => {
           <AiOutlineReload></AiOutlineReload>
         </ActionIcon>
       </Group>
+      <Slider
+        size="sm"
+        color="yellow"
+        value={slider}
+        onChange={setSlider}
+        onChangeEnd={setPopularity}
+      />
 
       <Divider />
       <div>
@@ -86,6 +97,7 @@ const Recommendation = () => {
                   image={track.album.images[1].url}
                   artistName={track.artists[0].name}
                   trackName={track.name}
+                  uri={track.uri}
                 />
               ))}
             </Grid>

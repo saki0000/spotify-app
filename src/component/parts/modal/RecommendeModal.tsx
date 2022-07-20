@@ -19,7 +19,7 @@ const RecommendeModal = ({ opened, setOpened, setSeedTrack }: any) => {
         size="xl"
         opened={opened}
         onClose={() => setOpened({ track: false })}
-        title={"Update the Playlist"}
+        title={"Search a track"}
       >
         <Stack align="stretch" style={{ marginTop: 30 }}>
           <Autocomplete

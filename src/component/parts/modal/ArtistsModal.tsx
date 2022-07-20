@@ -19,7 +19,7 @@ const ArtistModal = ({ opened, setOpened, setSeedArtist }: any) => {
         size="xl"
         opened={opened}
         onClose={() => setOpened({ artist: false })}
-        title={"Update the Playlist"}
+        title={"Search an artist"}
       >
         <Stack align="stretch" style={{ marginTop: 30 }}>
           <Autocomplete
@@ -33,7 +33,7 @@ const ArtistModal = ({ opened, setOpened, setSeedArtist }: any) => {
               {artistData.map((value: any) => (
                 <PlaylistTrack
                   valueId={value.id}
-                  valueImage={value.images[1]}
+                  valueImage={value.images[2]}
                   valueArtistName={value.name}
                 >
                   <ActionIcon

@@ -4,7 +4,7 @@ import { AiFillCaretRight } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { setPlayers, setIsPlayed } from "../../../features/playerSlice";
 
-const PlayerButton = ({ uri }: { [uri: string]: string }) => {
+const PlayerButton = ({ uri, size, variant }: any) => {
   const dispatch = useDispatch();
   return (
     <>
@@ -14,8 +14,9 @@ const PlayerButton = ({ uri }: { [uri: string]: string }) => {
           dispatch(setIsPlayed(true));
         }}
         color="yellow"
-        variant="outline"
+        variant={variant}
         radius="xl"
+        size={size}
       >
         <AiFillCaretRight></AiFillCaretRight>
       </ActionIcon>
