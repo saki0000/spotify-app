@@ -12,7 +12,7 @@ const PlaylistTrack = ({
     <div>
       <Group position="apart" align="center" style={{ height: 50 }}>
         <Group>
-          {valueImage.url ? (
+          {valueImage?.url ? (
             <Avatar src={valueImage.url} alt="" />
           ) : (
             <Avatar src={""} />
