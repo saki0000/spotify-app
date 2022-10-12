@@ -1,4 +1,12 @@
-import { ActionIcon, Divider, Grid, Group, Modal, Slider } from "@mantine/core";
+import {
+  ActionIcon,
+  Divider,
+  Grid,
+  Group,
+  Modal,
+  Slider,
+  Text,
+} from "@mantine/core";
 import { useSetState } from "@mantine/hooks";
 import { useEffect, useState } from "react";
 import { AiOutlineReload } from "react-icons/ai";
@@ -78,6 +86,7 @@ const Recommendation = () => {
           <AiOutlineReload></AiOutlineReload>
         </ActionIcon>
       </Group>
+      <Text>popularity</Text>
       <Slider
         size="sm"
         color="yellow"

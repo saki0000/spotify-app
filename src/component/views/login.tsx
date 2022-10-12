@@ -1,24 +1,20 @@
-import { Button, Container, Stack, Text } from "@mantine/core";
+import { Button, Stack, Text } from "@mantine/core";
 import { accessUrl } from "../../spotify";
-import image from "../../source/image.jpeg";
 
 function Login() {
   return (
     <div
       style={{
         width: "auto",
-        height: 821,
-        backgroundImage: `url(${image})`,
+        height: "100%",
+
+        backgroundColor: "#ffd700",
         backgroundSize: "contain",
         margin: 0,
       }}
     >
-      <Container>
-        <Text
-          color="white"
-          weight={500}
-          style={{ fontSize: 93, paddingTop: 170, paddingBottom: 50 }}
-        >
+      <Stack style={{ height: "100%" }} align="center" justify="center">
+        <Text color="white" weight={500} style={{ fontSize: 93 }}>
           Your Music with Spotify
         </Text>
 
@@ -29,7 +25,7 @@ function Login() {
             </a>
           </Button>
         </Stack>
-      </Container>
+      </Stack>
     </div>
   );
 }

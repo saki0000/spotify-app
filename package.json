@@ -2,7 +2,6 @@
   "name": "spotify-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://saki0000.github.io/spotify-app",
   "dependencies": {
     "@apollo/client": "^3.6.9",
     "@mantine/core": "^4.2.7",
