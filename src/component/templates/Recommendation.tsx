@@ -86,14 +86,16 @@ const Recommendation = () => {
           <AiOutlineReload></AiOutlineReload>
         </ActionIcon>
       </Group>
-      <Text>popularity</Text>
-      <Slider
-        size="sm"
-        color="yellow"
-        value={slider}
-        onChange={setSlider}
-        onChangeEnd={setPopularity}
-      />
+      <div>
+        <Text>popularity</Text>
+        <Slider
+          size="sm"
+          color="yellow"
+          value={slider}
+          onChange={setSlider}
+          onChangeEnd={setPopularity}
+        />
+      </div>
 
       <Divider />
       <div>

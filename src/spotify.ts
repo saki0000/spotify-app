@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const authEndpoint = "https://accounts.spotify.com/authorize";
 
-const redirectUri = "https://spotify-app-45526.web.app/";
+const redirectUri = "https://spotify-app-two-jet.vercel.app/";
 
 // const clientId = "2973baf5da5b4b9aa6f6bd10df7789d0";
 const clientId = "4fea89fb9d694a29a9f1fc6f7ad5be95";
